@@ -1,0 +1,52 @@
+{
+    "name": "field-health-survey-api",
+    "version": "1.0.0",
+    "description": "Backend API for the Community Health Field Survey app (offline-first sync)",
+    "private": true,
+    "main": "index.js",
+    "engines": {
+        "node": ">=22"
+    },
+    "scripts": {
+        "start": "node --env-file=.env index.js",
+        "dev": "node --watch --env-file=.env index.js",
+        "start:worker": "node --env-file=.env worker.js",
+        "dev:worker": "node --watch --env-file=.env worker.js",
+        "migrate": "node --env-file=.env node_modules/sequelize-cli/lib/sequelize db:migrate",
+        "migrate:undo": "node --env-file=.env node_modules/sequelize-cli/lib/sequelize db:migrate:undo",
+        "seed": "node --env-file=.env node_modules/sequelize-cli/lib/sequelize db:seed:all",
+        "db:setup": "npm run migrate && npm run seed",
+        "test": "cross-env NODE_ENV=test node --env-file=.env.test node_modules/jest/bin/jest.js --runInBand --forceExit",
+        "lint": "eslint .",
+        "format": "prettier --write .",
+        "migrate:reset": "node --env-file=.env node_modules/sequelize-cli/lib/sequelize db:migrate:undo:all",
+        "test:setup": "node --env-file=.env.test node_modules/sequelize-cli/lib/sequelize db:migrate && node --env-file=.env.test node_modules/sequelize-cli/lib/sequelize db:seed:all"
+    },
+    "dependencies": {
+        "bcrypt": "^6.0.0",
+        "bullmq": "^6.7.0",
+        "cors": "^2.8.6",
+        "express": "^5.3.0",
+        "express-rate-limit": "^8.7.3",
+        "helmet": "^8.3.0",
+        "ioredis": "^6.0.0",
+        "jsonwebtoken": "^9.0.3",
+        "pg": "^8.23.1",
+        "pg-hstore": "^2.3.4",
+        "pino": "^10.4.0",
+        "pino-http": "^11.0.0",
+        "sequelize": "^6.37.8",
+        "zod": "^4.6.7"
+    },
+    "devDependencies": {
+        "@eslint/js": "^10.0.1",
+        "cross-env": "^10.1.0",
+        "eslint": "^10.14.0",
+        "globals": "^17.14.0",
+        "jest": "^30.5.2",
+        "pino-pretty": "^13.2.0",
+        "prettier": "^3.9.10",
+        "sequelize-cli": "^6.6.5",
+        "supertest": "^7.3.1"
+    }
+}
